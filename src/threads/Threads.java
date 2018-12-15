@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package threads;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 class RunningThread implements Runnable{    
     Thread runner;
     public RunningThread(){
@@ -17,6 +16,13 @@ class RunningThread implements Runnable{
         System.out.println(Thread.currentThread());
     }
 }
+
+class ExRunnable implements Runnable {
+
+        public void run() {
+            System.out.println("BigBird " + Thread.currentThread().getName());
+        }
+    }
 /**
  *
  * @author Poozer
@@ -28,11 +34,17 @@ public class Threads {
         RunningThread thread3 = new RunningThread("Elmo");
         thread1.start();
         thread2.start();
+        
+        Executor theCount = Executors.newCachedThreadPool();//theCount is the Executor (as he should be)
+            ExRunnable BigBirdRunnable = new ExRunnable();
+            theCount.execute(BigBirdRunnable);
         try{
             Thread.currentThread().sleep(1000);
         } catch(InterruptedException e){
         }
         System.out.println(Thread.currentThread());
     }
-    
 }
+   
+    
+
