@@ -33,16 +33,18 @@ public class Threads {
         Thread thread2 = new Thread(new RunningThread(), "Ernie");
         RunningThread thread3 = new RunningThread("Elmo");
         thread1.start();
-        thread2.start();
+        
         
         Executor theCount = Executors.newCachedThreadPool();//theCount is the Executor (as he should be)
             ExRunnable BigBirdRunnable = new ExRunnable();
             theCount.execute(BigBirdRunnable);
         try{
-            Thread.currentThread().sleep(1000);
+            Thread.currentThread().sleep(100);
         } catch(InterruptedException e){
         }
         System.out.println(Thread.currentThread());
+        
+        thread2.start();
     }
 }
    
